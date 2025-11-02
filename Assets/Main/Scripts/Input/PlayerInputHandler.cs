@@ -26,7 +26,7 @@ namespace Main.Scripts.Input
 
         private void OnLBM(InputAction.CallbackContext obj)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

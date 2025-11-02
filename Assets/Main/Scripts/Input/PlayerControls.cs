@@ -42,6 +42,33 @@ namespace Main.Scripts.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""8e575ae6-a6c2-425c-aa22-d05b6594706b"",
+            ""actions"": [
+                {
+                    ""name"": ""SpeedUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""a253d8b9-aa0e-4d26-b6b2-5f768b4b1639"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d282d657-2d18-4ce7-b63a-84d37b1d7085"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -49,6 +76,9 @@ namespace Main.Scripts.Input
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_LBM = m_Player.FindAction("LBM", throwIfNotFound: true);
+            // Debug
+            m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+            m_Debug_SpeedUp = m_Debug.FindAction("SpeedUp", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -127,9 +157,46 @@ namespace Main.Scripts.Input
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // Debug
+        private readonly InputActionMap m_Debug;
+        private IDebugActions m_DebugActionsCallbackInterface;
+        private readonly InputAction m_Debug_SpeedUp;
+        public struct DebugActions
+        {
+            private @PlayerControls m_Wrapper;
+            public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @SpeedUp => m_Wrapper.m_Debug_SpeedUp;
+            public InputActionMap Get() { return m_Wrapper.m_Debug; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+            public void SetCallbacks(IDebugActions instance)
+            {
+                if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+                {
+                    @SpeedUp.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSpeedUp;
+                    @SpeedUp.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSpeedUp;
+                    @SpeedUp.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSpeedUp;
+                }
+                m_Wrapper.m_DebugActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @SpeedUp.started += instance.OnSpeedUp;
+                    @SpeedUp.performed += instance.OnSpeedUp;
+                    @SpeedUp.canceled += instance.OnSpeedUp;
+                }
+            }
+        }
+        public DebugActions @Debug => new DebugActions(this);
         public interface IPlayerActions
         {
             void OnLBM(InputAction.CallbackContext context);
+        }
+        public interface IDebugActions
+        {
+            void OnSpeedUp(InputAction.CallbackContext context);
         }
     }
 }

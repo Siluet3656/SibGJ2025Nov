@@ -1,5 +1,5 @@
 {
-    "name": "PlayerControlls",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Player",
@@ -23,6 +23,33 @@
                     "processors": "",
                     "groups": "",
                     "action": "LBM",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Debug",
+            "id": "8e575ae6-a6c2-425c-aa22-d05b6594706b",
+            "actions": [
+                {
+                    "name": "SpeedUp",
+                    "type": "Button",
+                    "id": "a253d8b9-aa0e-4d26-b6b2-5f768b4b1639",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d282d657-2d18-4ce7-b63a-84d37b1d7085",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpeedUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

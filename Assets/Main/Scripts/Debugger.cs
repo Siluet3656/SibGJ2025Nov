@@ -1,18 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Debugger : MonoBehaviour
+namespace Main.Scripts
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Debugger : MonoBehaviour
     {
+        [SerializeField] private float _SpeedUpTimeScale;
         
-    }
+        private float _defaultTimeScale = 1f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void SpeedUp()
+        {
+            Time.timeScale = _SpeedUpTimeScale;
+            Debug.Log(Time.timeScale);
+        }
+
+        public void DefaultTimeScale()
+        {
+            Time.timeScale = _defaultTimeScale;
+            Debug.Log(Time.timeScale);
+        }
     }
 }

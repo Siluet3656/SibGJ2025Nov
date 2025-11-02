@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4181499}
+  - component: {fileID: 4181500}
   m_Layer: 0
   m_Name: Debugger
   m_TagString: Untagged
@@ -153,6 +154,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4181500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95795a545b647ab439a7d3208475a90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpeedUpTimeScale: 10
 --- !u!1 &73987051
 GameObject:
   m_ObjectHideFlags: 0
@@ -2197,6 +2211,7 @@ GameObject:
   - component: {fileID: 1716779358}
   - component: {fileID: 1716779357}
   - component: {fileID: 1716779356}
+  - component: {fileID: 1716779359}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2260,6 +2275,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1716779359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716779355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca92cfcc61cd2943806bbe6eab2f946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debugger: {fileID: 4181500}
 --- !u!1 &1771228115
 GameObject:
   m_ObjectHideFlags: 0

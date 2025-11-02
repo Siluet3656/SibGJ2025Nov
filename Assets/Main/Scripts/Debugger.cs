@@ -11,13 +11,11 @@ namespace Main.Scripts
         public void SpeedUp()
         {
             Time.timeScale = _SpeedUpTimeScale;
-            Debug.Log(Time.timeScale);
         }
 
         public void DefaultTimeScale()
         {
             Time.timeScale = _defaultTimeScale;
-            Debug.Log(Time.timeScale);
         }
     }
 }

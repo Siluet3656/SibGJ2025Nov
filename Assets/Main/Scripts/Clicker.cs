@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -16,12 +17,25 @@ namespace Main.Scripts
        private int _moneyIncome = 1;
        
        private bool _buttonPressed;
+       private bool _isAutoClick;
 
        private void Awake()
        {
            _moneyBag = new MoneyBag(_moneyText);
 
            _buttonPressed = false;
+           _isAutoClick = false;
+       }
+
+       private void Update()
+       {
+           if (_isAutoClick)
+           {
+               if (_buttonPressed == false)
+               {
+                   StartCoroutine(ButtonProgressRoutine());
+               }
+           }
        }
 
        private IEnumerator ButtonProgressRoutine()
@@ -49,12 +63,19 @@ namespace Main.Scripts
            _buttonProgressImage.fillAmount = 0f;
        }
 
+       public MoneyBag GetMoneyBag => _moneyBag;
+
        public void MainButtonClick()
        {
            if (_buttonPressed == false)
            {
                StartCoroutine(ButtonProgressRoutine());
            }
+       }
+
+       public void SetAutoClick()
+       {
+           _isAutoClick = true;
        }
     }
 }

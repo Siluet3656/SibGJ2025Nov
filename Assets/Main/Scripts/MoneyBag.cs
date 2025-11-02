@@ -28,13 +28,17 @@ namespace Main.Scripts
             OnMoneyChanged?.Invoke(CurrentMoney);
         }
         
-        public void SpendMoney(int money)
+        public bool SpendMoney(int money)
         {
-            if (money < 0) return;
+            if (money < 0) return false;
+            
+            if (CurrentMoney - money < 0) return false;
             
             CurrentMoney -= money;
             
             OnMoneyChanged?.Invoke(CurrentMoney);
+
+            return true;
         }
     }
 }

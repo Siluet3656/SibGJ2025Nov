@@ -6,13 +6,26 @@ namespace Main.Scripts
     public class Clocks : MonoBehaviour
     {
         [SerializeField] private TMP_Text _text;
+        [SerializeField] private TMP_Text _daysText;
 
         private int _time;
         private float _timeFloat;
         
+        private int _currentDay;
+
+        private int _startOfDay;
+        private int _endOfDay;
+        
         private void Awake()
         {
-            _text.text = "0:00";
+            _startOfDay = 359;
+            _endOfDay = 1400;
+            
+            _currentDay = 0;
+            _time = _startOfDay;
+            
+            _text.text = "6:00";
+            _daysText.text = "Day: 0";
         }
 
         private void Update()
@@ -50,6 +63,18 @@ namespace Main.Scripts
                     _text.text = $"{hours}:{minutes}";
                 }
             }
+
+            if (_time >= _endOfDay)
+            {
+                NextDay();
+                _time = _startOfDay;
+            }
+        }
+
+        public void NextDay()
+        {
+            _currentDay++;
+            _daysText.text = "Day: " + _currentDay;
         }
     }
 }

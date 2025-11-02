@@ -29,7 +29,7 @@ namespace Main.Scripts
 
                 UpdateErgonomicClickerAmount(fPercent);
             }
-            else if (rand <= 90)
+            else if (rand > 90)
             {
                 UpdateRandomBoostChancePercent(1);
             }

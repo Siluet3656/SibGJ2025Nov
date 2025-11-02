@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Main.Scripts.View;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -61,6 +62,7 @@ namespace Main.Scripts
        {
            _moneyBag.GetMoney(_moneyIncome);
            _buttonProgressImage.fillAmount = 0f;
+           Popup.Instance.AddText($"+{_moneyIncome}$", transform.position, Color.green);
        }
 
        public MoneyBag GetMoneyBag => _moneyBag;

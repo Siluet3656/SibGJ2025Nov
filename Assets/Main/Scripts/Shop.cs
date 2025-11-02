@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Main.Scripts.View;
+using UnityEngine;
 
 namespace Main.Scripts
 {
@@ -20,10 +21,12 @@ namespace Main.Scripts
                 _autoClickerBoughtText.SetActive(true);
             
                 _clicker.SetAutoClick();   
+                
+                Popup.Instance.AddText("Purchased", transform.position, Color.green);
             }
             else
             {
-                
+                Popup.Instance.AddText("Not enough money to buy", transform.position, Color.red);
             }
         }
     }

@@ -6,7 +6,7 @@
             "id": "a8f3c02d-95a2-4ca1-897e-f25051a2a3b2",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "LBM",
                     "type": "Button",
                     "id": "45214712-4d8c-4e3f-b5e3-88a96fdd6b81",
                     "expectedControlType": "Button",
@@ -18,11 +18,11 @@
                 {
                     "name": "",
                     "id": "0f3c4596-94a2-4d6f-80a6-467bace312e4",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "LBM",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

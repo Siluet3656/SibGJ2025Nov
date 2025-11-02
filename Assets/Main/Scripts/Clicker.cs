@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Main.Scripts.View;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,18 +13,31 @@ namespace Main.Scripts
        
        private MoneyBag _moneyBag;
        
-       private float _buttonTimeToEarn = 2.5f;
-       private int _moneyIncome = 1;
+       private float _buttonTimeToEarn;
+       
+       private int _defaultIncome = 1;
+       private float _defaultTimeToEarn  = 2.5f;
+       private int _moneyIncome;
        
        private bool _buttonPressed;
        private bool _isAutoClick;
+       private bool _isGambling;
+       private bool _isIncomeBoosted;
+
+       private int _chanceOfRandomBoost;
 
        private void Awake()
        {
+           G.Clicker = this;
+           
            _moneyBag = new MoneyBag(_moneyText);
 
            _buttonPressed = false;
            _isAutoClick = false;
+           _isGambling = true;
+
+           _moneyIncome = _defaultIncome;
+           _buttonTimeToEarn = _defaultTimeToEarn;
        }
 
        private void Update()
@@ -55,17 +67,61 @@ namespace Main.Scripts
            _buttonProgressImage.fillAmount = 1f;
            _buttonPressed = false;
            
-           EarnMoney();
+           if (_isIncomeBoosted)
+           {
+               EarnMoney(2);
+           }
+           else
+           {
+               EarnMoney(1);
+           }
+
+           if (_isGambling)
+           {
+               G.Gambling.Gamba();
+           }
        }
 
-       private void EarnMoney()
+       private void EarnMoney(int multiplier)
        {
-           _moneyBag.GetMoney(_moneyIncome);
+           
+           _moneyBag.GetMoney(_moneyIncome * multiplier);
            _buttonProgressImage.fillAmount = 0f;
-           Popup.Instance.AddText($"+{_moneyIncome}$", transform.position, Color.green);
+           Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", transform.position, Color.green);
+           
+           int rand = Random.Range(0, 100);
+
+           if (rand < _chanceOfRandomBoost)
+           {
+               if (_isIncomeBoosted == false)
+               {
+                  StartCoroutine(BoostIncome());
+               }
+           }
+       }
+
+       private IEnumerator BoostIncome()
+       {
+           _isIncomeBoosted = true;
+
+           Popup.Instance.AddText("BOOSTED!!", G.Passives.RandomBoostText.transform.position, Color.cyan);
+           
+           float progress = 0;
+
+           while (progress < 5f)
+           {
+               progress += Time.deltaTime;
+               yield return null;
+           }
+           
+           Popup.Instance.AddText("Boots is gone...", G.Passives.RandomBoostText.transform.position, Color.white);
+           
+           _isIncomeBoosted = false;
        }
 
        public MoneyBag GetMoneyBag => _moneyBag;
+       public int DefaultMoneyIncome => _defaultIncome;
+       public float DefaultRate => _defaultTimeToEarn;
 
        public void MainButtonClick()
        {
@@ -78,6 +134,25 @@ namespace Main.Scripts
        public void SetAutoClick()
        {
            _isAutoClick = true;
+       }
+
+       public void SetIncome(int amount)
+       {
+           _moneyIncome = amount;
+       }
+
+       public void SetRate(float rate)
+       {
+           if (rate <= 0.05f) return;
+           
+           _buttonTimeToEarn = rate;
+       }
+
+       public void SetRandomBoostChance(int amount)
+       {
+           if (amount >= 100) return;
+           
+           _chanceOfRandomBoost = amount;
        }
     }
 }

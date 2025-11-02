@@ -22,7 +22,7 @@ namespace Main.Scripts
             
                 _clicker.SetAutoClick();   
                 
-                Popup.Instance.AddText("Purchased", transform.position, Color.green);
+                Popup.Instance.AddText("Purchased", _autoClickerButton.transform.position, Color.green);
             }
             else
             {

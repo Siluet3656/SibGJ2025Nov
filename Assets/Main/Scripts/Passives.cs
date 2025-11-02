@@ -9,6 +9,7 @@ namespace Main.Scripts
         [SerializeField] private TMP_Text _incomeText;
         [SerializeField] private TMP_Text _rateText;
         [SerializeField] private TMP_Text _randomBoostText;
+        [SerializeField] private TMP_Text _luckText;
         
         private readonly float _defaultIncome = 1f;
         private float _incomeBoostPercent = 0f;
@@ -52,6 +53,11 @@ namespace Main.Scripts
             G.Clicker.SetRandomBoostChance(_randomBoostChancePercent);
             
             _randomBoostText.text = $"{_randomBoostChancePercent}%";
+        }
+
+        public void UpdateLuck(int luck)
+        {
+            _luckText.text = $"{luck}";
         }
     }
 }

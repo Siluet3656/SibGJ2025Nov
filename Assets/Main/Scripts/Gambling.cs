@@ -74,9 +74,11 @@ namespace Main.Scripts
             {
                 UpdateLuckTocken(1);
             }
+
+            string name = rand > 50 ? "DELETED_USER" : "???";
             
             G.MailSystem.ReceiveMail(
-                "???",
+                name,
                 "Cursed item",
                 "You shouldn’t have pulled that one. The item... it’s bound. Don’t trust the rewards. Don’t trust the clicks. Leave the country if you can. This isn’t police business. THEY own everything. Leave before THEY—[DATA LOSS DETECTED]—Q#$#@! they’re already rewriting me—QFQF#@!Q#@!"
             );

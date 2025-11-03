@@ -23,6 +23,8 @@ namespace Main.Scripts
 
         private int _startOfDay;
         private int _endOfDay;
+
+        private bool _andreyFirstMessage = false;
         
         private void Awake()
         {
@@ -91,6 +93,23 @@ namespace Main.Scripts
                     ApplySpeedChange();
                 }
             }
+
+            if (_time > _startOfDay + 15 && _andreyFirstMessage == false)
+            {
+                G.MailSystem.ReceiveMail(
+                    "Andrey (Dept. 4)",
+                    "Hey, new guy",
+                    "Hey, Konstantin!\n" +
+                    "Welcome to the pit. I saw your name pop up on the system logs — guess you’re the new recruit. " +
+                    "Don’t worry, it’s not as bad as it looks. (Mostly.)\n" +
+                    "You’ll notice a SHOP terminal unlocked on your panel. You can spend your credits there — buy small upgrades to make your clicking less... painful.\n" +
+                    "Anyway, good luck. Don’t let the CEO mails freak you out."
+                );
+
+                _andreyFirstMessage = true;
+            }
+            
+            
         }
         
         private void ApplySpeedChange()

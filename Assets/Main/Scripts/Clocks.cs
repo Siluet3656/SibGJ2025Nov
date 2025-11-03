@@ -25,7 +25,8 @@ namespace Main.Scripts
         private int _endOfDay;
 
         private bool _andreyFirstMessage = false;
-        
+        private bool _andreySecomdMessage;
+
         private void Awake()
         {
             _startOfDay = 359;
@@ -109,7 +110,23 @@ namespace Main.Scripts
                 _andreyFirstMessage = true;
             }
             
-            
+            if (_time > _startOfDay + 30 && _andreySecomdMessage == false)
+            {
+                G.MailSystem.ReceiveMail(
+                    "Andrey (Dept. 4)",
+                    "About the Perks",
+                    "Hey Konstantin!\n" +
+                    "So, you’ve probably noticed that SHOP terminal I mentioned earlier. Here’s a little insider tip: " +
+                    "some items there aren’t just regular upgrades — they can randomly give you passive perks that boost your clicks automatically.\n" +
+                    "There are different tiers: Common, Rare, and [^$&*!]." +
+                    "Nothing dangerous, of course…\n" +
+                    "Catch you later, and remember: click smart, not just fast!"
+                );
+
+                G.Clicker.GoGamba();
+                
+                _andreySecomdMessage = true;
+            }
         }
         
         private void ApplySpeedChange()

@@ -11,6 +11,7 @@ namespace Main.Scripts
        [SerializeField] private Image _buttonProgressImage;
        [SerializeField] private TMP_Text _moneyText;
        [SerializeField] private Image _hungretClicksImage;
+       [SerializeField] private GameObject _pasivesEmptySpotsHolder;
        
        private MoneyBag _moneyBag;
        
@@ -37,7 +38,7 @@ namespace Main.Scripts
 
            _buttonPressed = false;
            _isAutoClick = false;
-           _isGambling = true;
+           _isGambling = false;
 
            _moneyIncome = _defaultIncome;
            _buttonTimeToEarn = _defaultTimeToEarn;
@@ -54,6 +55,11 @@ namespace Main.Scripts
            }
 
            _hungretClicksIncomePercent = G.Passives.TeamSpiritPercent;
+
+           if (_pasivesEmptySpotsHolder.activeInHierarchy == false && _isGambling)
+           {
+               _pasivesEmptySpotsHolder.SetActive(true);
+           }
        }
 
        private IEnumerator ButtonProgressRoutine()
@@ -225,6 +231,11 @@ namespace Main.Scripts
            if (amount >= 100) return;
            
            _chanceOfRandomBoost = amount;
+       }
+
+       public void GoGamba()
+       {
+           _isGambling = true;
        }
     }
 }

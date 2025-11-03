@@ -62,13 +62,38 @@ public class MailSystem : MonoBehaviour
     {
         if (mailButtonPrefab == null || mailListParent == null) return;
 
+        var mail = inbox[index];
         var btnObj = Instantiate(mailButtonPrefab, mailListParent);
         var btnText = btnObj.GetComponentInChildren<TMP_Text>();
-        btnText.text = inbox[index].subject;
+        btnText.text = mail.subject;
+
+        // ✅ Настраиваем визуал в зависимости от прочитанности
+        if (mail.isRead)
+        {
+            btnText.color = Color.white;
+            btnText.fontStyle = FontStyles.Normal;
+        }
+        else
+        {
+            btnText.color = new Color(0.7f, 0, 0f); // тёмно-серый
+            btnText.fontStyle = FontStyles.Bold;
+        }
 
         int i = index;
-        btnObj.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => DisplayMail(i));
+        btnObj.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+        {
+            DisplayMail(i);
+            UpdateMailButtonVisual(btnObj, inbox[i]);
+        });
     }
+
+    void UpdateMailButtonVisual(GameObject button, MailMessage mail)
+    {
+        var txt = button.GetComponentInChildren<TMP_Text>();
+        txt.color = Color.black;
+        txt.fontStyle = FontStyles.Normal;
+    }
+
 
     public void DisplayMail(int index)
     {

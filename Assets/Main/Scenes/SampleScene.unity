@@ -3456,6 +3456,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 942911003}
   _daysText: {fileID: 1090707756}
+  _speedSlowPercent: 0
+  _switchInterval: 10
 --- !u!4 &516241966
 Transform:
   m_ObjectHideFlags: 0
@@ -9974,6 +9976,7 @@ MonoBehaviour:
   _discountText: {fileID: 2078500330}
   _teamSpiritText: {fileID: 2049392295}
   _moneyDoublerText: {fileID: 453645533}
+  _speedSlowText: {fileID: 150252720}
   _debtText: {fileID: 498218522}
 --- !u!4 &2107556037
 Transform:

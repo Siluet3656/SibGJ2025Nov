@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Main.Scripts.View;
+using UnityEngine;
 using TMPro;
 
 namespace Main.Scripts
@@ -7,6 +8,13 @@ namespace Main.Scripts
     {
         [SerializeField] private TMP_Text _text;
         [SerializeField] private TMP_Text _daysText;
+        
+        [Header("Zavardo")]
+        [SerializeField] private int _speedSlowPercent = 0; // замедление/ускорение в %
+        [SerializeField] private float _switchInterval = 10f; // каждые 10 секунд
+        
+        private bool _isSlowed;
+        private float _timer;
 
         private int _time;
         private float _timeFloat;
@@ -68,6 +76,44 @@ namespace Main.Scripts
             {
                 NextDay();
                 _time = _startOfDay;
+            }
+
+            _speedSlowPercent = G.Passives.SpeedSlowPercent;
+            
+            if (_speedSlowPercent > 0)
+            {
+                _timer += Time.deltaTime;
+
+                if (_timer >= _switchInterval)
+                {
+                    _timer = 0f;
+                    _isSlowed = !_isSlowed; // переключаем режим
+                    ApplySpeedChange();
+                }
+            }
+        }
+        
+        private void ApplySpeedChange()
+        {
+            if (_isSlowed)
+            {
+                // Замедляем
+                Time.timeScale = 1f - (_speedSlowPercent / 100f);
+                //Debug.Log($"⏳ Замедление на {_speedSlowPercent}% (Time.timeScale = {Time.timeScale})");
+                if (G.Passives.SpeedSlowText.gameObject.activeInHierarchy)
+                {
+                    Popup.Instance.AddText("Time slowed!!", G.Passives.SpeedSlowText.transform.position, Color.cyan);
+                }
+            }
+            else
+            {
+                // Ускоряем
+                Time.timeScale = 1f + (_speedSlowPercent / 100f);
+                //Debug.Log($"⚡ Ускорение на {_speedSlowPercent}% (Time.timeScale = {Time.timeScale})");
+                if (G.Passives.AutoClickText.gameObject.activeInHierarchy)
+                {
+                    Popup.Instance.AddText("Time accelerated!!", G.Passives.SpeedSlowText.transform.position, Color.cyan);
+                }
             }
         }
 

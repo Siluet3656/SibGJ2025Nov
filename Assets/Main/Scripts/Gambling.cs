@@ -72,7 +72,7 @@ namespace Main.Scripts
             }
             else
             {
-                // Synthetic Luck Token  (Time slow/speed up each 10 sec)
+                UpdateLuckTocken(1);
             }
             
             G.MailSystem.ReceiveMail(
@@ -173,6 +173,12 @@ namespace Main.Scripts
         private void UpdateIncomeForHungretClicks(int i)
         {
             G.Passives.UpdateHungretClicks(i);
+        }
+        
+        
+        private void UpdateLuckTocken(int i)
+        {
+            G.Passives.UpdateLuckToken(i);
         }
     }
 }

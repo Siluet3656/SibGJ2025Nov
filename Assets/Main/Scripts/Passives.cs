@@ -15,6 +15,7 @@ namespace Main.Scripts
         [SerializeField] private TMP_Text _discountText;
         [SerializeField] private TMP_Text _teamSpiritText;
         [SerializeField] private TMP_Text _moneyDoublerText;
+        [SerializeField] private TMP_Text _speedSlowText;
 
         [Header("Other")] [SerializeField] private TMP_Text _debtText;
         
@@ -28,6 +29,7 @@ namespace Main.Scripts
         private int _autoClickChancePercent;
         private int _discountPercent;
         private int _teamSpiritPercent;
+        private int _speedSlowPercent;
         
         private long _debtAmount = 1000000000;
 
@@ -46,9 +48,11 @@ namespace Main.Scripts
 
         public TMP_Text RandomBoostText => _randomBoostText;
         public TMP_Text AutoClickText => _autoClickText;
+        public TMP_Text SpeedSlowText => _speedSlowText;
         public int AutoClickChancePercent => _autoClickChancePercent;
         public int DiscountPercent => _discountPercent;
         public int TeamSpiritPercent => _teamSpiritPercent;
+        public int SpeedSlowPercent => _speedSlowPercent;
 
         public void UpdateIncomeBoost(float amount)
         {
@@ -157,6 +161,18 @@ namespace Main.Scripts
             if (_moneyDoublerText.gameObject.activeInHierarchy)
             {
                 Popup.Instance.AddText("Debt doubled!!", _moneyDoublerText.transform.position, Color.red);
+            }
+        }
+
+        public void UpdateLuckToken(int i)
+        {
+            _speedSlowPercent += i;
+
+            _speedSlowText.text = $"+/-{_speedSlowPercent}%";
+            
+            if (_speedSlowText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("+1%", _speedSlowText.transform.position, Color.white);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Main.Scripts.View;
+using TMPro;
 using UnityEngine;
 
 namespace Main.Scripts
@@ -8,12 +9,22 @@ namespace Main.Scripts
         [SerializeField] private Clicker _clicker;
         [SerializeField] private GameObject _autoClickerButton;
         [SerializeField] private GameObject _autoClickerBoughtText;
+        [SerializeField] private TMP_Text _autoClickerCostText;
         
-        [SerializeField] private int _autoClickCost = 500;
+        [SerializeField] private int _defaultAutoClickCost = 500;
+
+        private int _currentAutoClickCost;
+        
+        private void Update()
+        {
+            _currentAutoClickCost = (int)(_defaultAutoClickCost * (1f - G.Passives.DiscountPercent / 100f));
+            
+            _autoClickerCostText.text = $"{_currentAutoClickCost}$";
+        }
 
         public void BuyAutoClick()
         {
-            bool isPurchased = _clicker.GetMoneyBag.SpendMoney(_autoClickCost);
+            bool isPurchased = _clicker.GetMoneyBag.SpendMoney(_currentAutoClickCost);
 
             if (isPurchased)
             {

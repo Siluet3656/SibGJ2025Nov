@@ -57,7 +57,8 @@ namespace Main.Scripts
             {
                 Cursed();
             }
-
+            
+            //Debug.Log($"Junk: {junkChance}, Normal: {normalChance}, Rare: {rareChance}, Cursed: {cursedChance}");
         }
 
         private void Cursed()
@@ -78,22 +79,22 @@ namespace Main.Scripts
         {
             int rand = Random.Range(0, 100); // Corporate Mantra Chip(Mult boost chance) 0-50 / Productivity Halo(Random chance to auto-click 5x) 51-85
                                              // Focus Stickers(reduces shop cost) 86-90 / Team Spirit Bonus (+1% for every 100 clicks) 91-100
-                                             
+                                                               
             if (rand <= 50)
             {
                 UpdateRandomBoostChancePercent(1);
             }
             else if (rand <= 85)
             {
-                // Productivity Halo(Random chance to auto-click 5x)
+                UpdateHalo(1); 
             }
             else if (rand <= 90)
             {
-                // Focus Stickers(reduces shop cost) 86-90
+                UpdateFocus(1);  
             }
             else
-            {
-                // Team Spirit Bonus (+1% for every 100 clicks)
+            { Debug.Log($"Team Spirit Bonus "); 
+                // Team Spirit Bonus (+1% for every 100 clicks) 
             }
         }
 
@@ -103,7 +104,7 @@ namespace Main.Scripts
             
             if (rand <= 80)
             {
-                int percent = Random.Range(0, 50);
+                int percent = Random.Range(10, 50);
                 
                 float fPercent = percent / 100f;
                 
@@ -111,7 +112,7 @@ namespace Main.Scripts
             }
             else if (rand <= 86)
             {
-                int percent = Random.Range(0, 50);
+                int percent = Random.Range(10, 30);
                 
                 float fPercent = percent / 100f;
 
@@ -123,32 +124,42 @@ namespace Main.Scripts
             }
         }
 
-        public void Junk()
+        private void Junk()
         {
             //Popup.Instance.AddText("Junk", transform.position, Color.red);
         }
         
-        public void UpdateCoffeeEfficiencyAmount(float percentage)
+        private void UpdateCoffeeEfficiencyAmount(float percentage)
         {
             G.Passives.UpdateIncomeBoost(percentage);
         }
         
-        public void UpdateErgonomicClickerAmount(float percentage)
+        private void UpdateErgonomicClickerAmount(float percentage)
         {
             G.Passives.UpdateRateBoost(percentage);
         }
 
-        public void UpdateRandomBoostChancePercent(int chance)
-        {
-            G.Passives.UpdateRandomBoostPercent(chance);
-        }
-
-        public void AddLuck()
+        private void AddLuck()
         {
             if (_luck >= 100) return;
             
             _luck++;
             G.Passives.UpdateLuck(_luck);
+        }
+        
+        private void UpdateRandomBoostChancePercent(int chance)
+        {
+            G.Passives.UpdateRandomBoostPercent(chance);
+        }
+
+        private void UpdateHalo(int chance)
+        {
+            G.Passives.UpdateAutoClick(chance);
+        }
+        
+        private void UpdateFocus(int i)
+        {
+            G.Passives.UpdateDiscount(i);
         }
     }
 }

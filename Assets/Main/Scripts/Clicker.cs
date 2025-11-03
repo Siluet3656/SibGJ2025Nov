@@ -69,11 +69,37 @@ namespace Main.Scripts
            
            if (_isIncomeBoosted)
            {
-               EarnMoney(2);
+               int rand = Random.Range(0, 100);
+
+               if (rand < G.Passives.AutoClickChancePercent)
+               {
+                   Popup.Instance.AddText("proc!!", G.Passives.AutoClickText.transform.position, Color.white);
+                   for (int i = 0; i < 5; i++)
+                   {
+                       EarnMoney(2);
+                   }
+               }
+               else
+               {
+                   EarnMoney(2);
+               }
            }
            else
            {
-               EarnMoney(1);
+               int rand = Random.Range(0, 100);
+
+               if (rand < G.Passives.AutoClickChancePercent)
+               {
+                   Popup.Instance.AddText("proc!!", G.Passives.AutoClickText.transform.position, Color.white);
+                   for (int i = 0; i < 5; i++)
+                   {
+                       EarnMoney(1);
+                   }
+               }
+               else
+               {
+                   EarnMoney(1);
+               }
            }
 
            if (_isGambling)
@@ -87,7 +113,10 @@ namespace Main.Scripts
            
            _moneyBag.GetMoney(_moneyIncome * multiplier);
            _buttonProgressImage.fillAmount = 0f;
-           Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", transform.position, Color.green);
+           
+           Vector2 randPos = new Vector2(transform.position.x + Random.Range(-100,100) / 100f, transform.position.y + Random.Range(-100,100) / 100f);
+           
+           Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", randPos, Color.green);
            
            int rand = Random.Range(0, 100);
 

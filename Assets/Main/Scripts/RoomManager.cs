@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
@@ -34,13 +35,25 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private void EnterPC()
+    private IEnumerator WaitFade()
     {
+        yield return null;
+        yield return new WaitUntil(() => G.ScreenFader.IsFading == false);
+        
+        G.ScreenFader.FadeIn();
+        
         ROOM.SetActive(false);
         
         PC.SetActive(true);
         //Time.SetActive(true);
         //Clicker.SetActive(true);
+    }
+
+    private void EnterPC()
+    {
+        G.ScreenFader.FadeOut();
+
+        StartCoroutine(WaitFade());
     }
 
     public void BackToRoom()

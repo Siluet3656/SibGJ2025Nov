@@ -6,4 +6,5 @@ public static class G
     public static Passives Passives;
     public static Gambling Gambling;
     public static MailSystem MailSystem;
+    public static ScreenFader ScreenFader;
 }

@@ -13,6 +13,10 @@ namespace Main.Scripts
         [SerializeField] private TMP_Text _luckText;
         [SerializeField] private TMP_Text _autoClickText;
         [SerializeField] private TMP_Text _discountText;
+        [SerializeField] private TMP_Text _teamSpiritText;
+        [SerializeField] private TMP_Text _moneyDoublerText;
+
+        [Header("Other")] [SerializeField] private TMP_Text _debtText;
         
         private readonly float _defaultIncome = 1f;
         private float _incomeBoostPercent = 0f;
@@ -23,16 +27,28 @@ namespace Main.Scripts
         private int _randomBoostChancePercent;
         private int _autoClickChancePercent;
         private int _discountPercent;
+        private int _teamSpiritPercent;
+        
+        private long _debtAmount = 1000000000;
 
         private void Awake()
         {
             G.Passives = this;
         }
 
+        private void Update()
+        {
+            if (G.Clicker.GetMoneyBag.CurrentMoney * 2 >= _debtAmount)
+            {
+                DoubleDebt();
+            }
+        }
+
         public TMP_Text RandomBoostText => _randomBoostText;
         public TMP_Text AutoClickText => _autoClickText;
         public int AutoClickChancePercent => _autoClickChancePercent;
         public int DiscountPercent => _discountPercent;
+        public int TeamSpiritPercent => _teamSpiritPercent;
 
         public void UpdateIncomeBoost(float amount)
         {
@@ -41,7 +57,11 @@ namespace Main.Scripts
             
             double rounded = Math.Round(_incomeBoostPercent, 1);
             _incomeText.text = $"+{rounded * 100}%";
-            Popup.Instance.AddText($"+{Math.Round(amount, 1) * 100}%", _incomeText.transform.position, Color.white);
+
+            if (_incomeText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText($"+{Math.Round(amount, 1) * 100}%", _incomeText.transform.position, Color.white);
+            }
         }
         
         public void UpdateRateBoost(float amount)
@@ -51,7 +71,11 @@ namespace Main.Scripts
             
             double rounded = Math.Round(_rateBoostPercent, 2);
             _rateText.text = $"+{rounded * 100}%";
-            Popup.Instance.AddText($"+{Math.Round(amount, 1) * 100}%", _rateText.transform.position, Color.white);
+
+            if (_rateText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText($"+{Math.Round(amount, 1) * 100}%", _rateText.transform.position, Color.white);
+            }
         }
 
         public void UpdateRandomBoostPercent(int amount)
@@ -63,13 +87,21 @@ namespace Main.Scripts
             G.Clicker.SetRandomBoostChance(_randomBoostChancePercent);
             
             _randomBoostText.text = $"{_randomBoostChancePercent}%";
-            Popup.Instance.AddText("+1%", _randomBoostText.transform.position, Color.white);
+
+            if (_randomBoostText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("+1%", _randomBoostText.transform.position, Color.white);
+            }
         }
 
         public void UpdateLuck(int luck)
         {
             _luckText.text = $"{luck}";
-            Popup.Instance.AddText("+1", _luckText.transform.position, Color.white);
+
+            if (_luckText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("+1", _luckText.transform.position, Color.white);
+            }
         }
 
         public void UpdateAutoClick(int autoClick)
@@ -79,7 +111,11 @@ namespace Main.Scripts
             _autoClickChancePercent += autoClick;
             
             _autoClickText.text = $"+{_autoClickChancePercent}%";
-            Popup.Instance.AddText("+1%", _luckText.transform.position, Color.white);
+
+            if (_luckText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("+1%", _luckText.transform.position, Color.white);
+            }
         }
 
         public void UpdateDiscount(int i)
@@ -89,7 +125,39 @@ namespace Main.Scripts
             _discountPercent += i;
             
             _discountText.text = $"-{_discountPercent}%";
-            Popup.Instance.AddText("-1%", _discountText.transform.position, Color.white);
+
+            if (_luckText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("-1%", _luckText.transform.position, Color.white);
+            }
+        }
+
+        public void UpdateHungretClicks(int i)
+        {
+            if (_teamSpiritPercent >= 100) return;
+            
+            _teamSpiritPercent += i;
+            
+            _teamSpiritText.text = $"+{_teamSpiritPercent}% each 100 clicks";
+
+            if (_teamSpiritText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("+1%", _teamSpiritText.transform.position, Color.white);
+            }
+        }
+
+        public void DoubleDebt()
+        {
+            _debtAmount *= 2;
+            
+            _debtText.text = $"{_debtAmount}$";
+            
+            _moneyDoublerText.text = $"x{_debtAmount / 1000000000} debt";
+
+            if (_moneyDoublerText.gameObject.activeInHierarchy)
+            {
+                Popup.Instance.AddText("Debt doubled!!", _moneyDoublerText.transform.position, Color.red);
+            }
         }
     }
 }

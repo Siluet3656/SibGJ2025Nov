@@ -8,8 +8,8 @@ namespace Main.Scripts
     {
         private MoneyView _moneyView ;
         
-        public int CurrentMoney { get; private set; }
-        public Action<int> OnMoneyChanged;
+        public long CurrentMoney { get; private set; }
+        public Action<long> OnMoneyChanged;
 
         public MoneyBag(TMP_Text uiText)
         {
@@ -19,7 +19,7 @@ namespace Main.Scripts
             OnMoneyChanged?.Invoke(CurrentMoney);
         }
         
-        public void GetMoney(int money)
+        public void GetMoney(long money)
         {
             if (money < 0) return;
             

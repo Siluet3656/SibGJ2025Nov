@@ -36,11 +36,16 @@ public class MailSystem : MonoBehaviour
 
     public event Action<MailMessage> OnMailReceived;
 
+    private void Awake()
+    {
+        G.MailSystem = this;
+    }
+
     void Start()
     {
         // Для теста — добавим пару писем
-        ReceiveMail("HR", "Welcome", "Добро пожаловать в компанию!");
-        ReceiveMail("CEO", "Project Update", "Не забудьте проверить отчёты.");
+        ReceiveMail("HR", "Welcome", "Whelcome to the company!");
+        ReceiveMail("CEO", "Project Update", "Check smth.");
     }
 
     public void ReceiveMail(string sender, string subject, string body)
@@ -72,7 +77,7 @@ public class MailSystem : MonoBehaviour
         var mail = inbox[index];
         mail.isRead = true;
 
-        senderText.text = $"От: {mail.sender}";
+        senderText.text = $"From: {mail.sender}";
         subjectText.text = mail.subject;
         messageText.text = mail.body;
     }

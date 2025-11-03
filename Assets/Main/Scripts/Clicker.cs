@@ -10,6 +10,7 @@ namespace Main.Scripts
     {
        [SerializeField] private Image _buttonProgressImage;
        [SerializeField] private TMP_Text _moneyText;
+       [SerializeField] private Image _hungretClicksImage;
        
        private MoneyBag _moneyBag;
        
@@ -25,6 +26,8 @@ namespace Main.Scripts
        private bool _isIncomeBoosted;
 
        private int _chanceOfRandomBoost;
+       private int _hungretClicksProgress;
+       private int _hungretClicksIncomePercent;
 
        private void Awake()
        {
@@ -49,6 +52,8 @@ namespace Main.Scripts
                    StartCoroutine(ButtonProgressRoutine());
                }
            }
+
+           _hungretClicksIncomePercent = G.Passives.TeamSpiritPercent;
        }
 
        private IEnumerator ButtonProgressRoutine()
@@ -73,7 +78,11 @@ namespace Main.Scripts
 
                if (rand < G.Passives.AutoClickChancePercent)
                {
-                   Popup.Instance.AddText("proc!!", G.Passives.AutoClickText.transform.position, Color.white);
+                   if (G.Passives.AutoClickText.gameObject.activeInHierarchy)
+                   {
+                       Popup.Instance.AddText("proc!!", G.Passives.AutoClickText.transform.position, Color.white);
+                   }
+
                    for (int i = 0; i < 5; i++)
                    {
                        EarnMoney(2);
@@ -90,7 +99,11 @@ namespace Main.Scripts
 
                if (rand < G.Passives.AutoClickChancePercent)
                {
-                   Popup.Instance.AddText("proc!!", G.Passives.AutoClickText.transform.position, Color.white);
+                   if (G.Passives.AutoClickText.gameObject.activeInHierarchy)
+                   {
+                       Popup.Instance.AddText("proc!!", G.Passives.AutoClickText.transform.position, Color.white);
+                   }
+
                    for (int i = 0; i < 5; i++)
                    {
                        EarnMoney(1);
@@ -115,9 +128,12 @@ namespace Main.Scripts
            _buttonProgressImage.fillAmount = 0f;
            
            Vector2 randPos = new Vector2(transform.position.x + Random.Range(-100,100) / 100f, transform.position.y + Random.Range(-100,100) / 100f);
-           
-           Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", randPos, Color.green);
-           
+
+           if (_hungretClicksImage.gameObject.activeInHierarchy)
+           {
+               Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", randPos, Color.green);
+           }
+
            int rand = Random.Range(0, 100);
 
            if (rand < _chanceOfRandomBoost)
@@ -127,14 +143,38 @@ namespace Main.Scripts
                   StartCoroutine(BoostIncome());
                }
            }
+           
+           if (_hungretClicksIncomePercent > 0)
+           {
+               _hungretClicksProgress++;
+               _hungretClicksImage.fillAmount = _hungretClicksProgress / 100f;
+
+               if (_hungretClicksProgress >= 100)
+               {
+                   _hungretClicksProgress = 0;
+                   _hungretClicksImage.fillAmount = 0f;
+
+                   int incomeHere = (int)(_moneyBag.CurrentMoney * (_hungretClicksIncomePercent / 100f));
+                   
+                   _moneyBag.GetMoney(incomeHere);
+
+                   if (_hungretClicksImage.gameObject.activeInHierarchy)
+                   {
+                       Popup.Instance.AddText($"+{incomeHere}$", _hungretClicksImage.transform.position, Color.green);
+                   }
+               }
+           }
        }
 
        private IEnumerator BoostIncome()
        {
            _isIncomeBoosted = true;
 
-           Popup.Instance.AddText("BOOSTED!!", G.Passives.RandomBoostText.transform.position, Color.cyan);
-           
+           if (G.Passives.RandomBoostText.gameObject.activeInHierarchy)
+           {
+               Popup.Instance.AddText("BOOSTED!!", G.Passives.RandomBoostText.transform.position, Color.cyan);
+           }
+
            float progress = 0;
 
            while (progress < 5f)
@@ -142,9 +182,12 @@ namespace Main.Scripts
                progress += Time.deltaTime;
                yield return null;
            }
-           
-           Popup.Instance.AddText("Boots is gone...", G.Passives.RandomBoostText.transform.position, Color.white);
-           
+
+           if (G.Passives.RandomBoostText.gameObject.activeInHierarchy)
+           {
+               Popup.Instance.AddText("Boots is gone...", G.Passives.RandomBoostText.transform.position, Color.white);
+           }
+
            _isIncomeBoosted = false;
        }
 

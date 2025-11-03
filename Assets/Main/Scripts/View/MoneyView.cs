@@ -14,7 +14,7 @@ namespace Main.Scripts.View
             _moneyBag.OnMoneyChanged += ShowMoney;
         }
 
-        private void ShowMoney(int currentMoney)
+        private void ShowMoney(long currentMoney)
         {
             _uiText.text = $"Current money: {_moneyBag.CurrentMoney.ToString()} $";
         }

@@ -7,6 +7,7 @@ namespace Main.Scripts
 {
     public class Passives : MonoBehaviour
     {
+        [Header("Texts")]
         [SerializeField] private TMP_Text _incomeText;
         [SerializeField] private TMP_Text _rateText;
         [SerializeField] private TMP_Text _randomBoostText;
@@ -17,6 +18,28 @@ namespace Main.Scripts
         [SerializeField] private TMP_Text _moneyDoublerText;
         [SerializeField] private TMP_Text _speedSlowText;
 
+        [Header("EmptySpots")]
+        [SerializeField] private GameObject _incomeEmptySpot;
+        [SerializeField] private GameObject _rateEmptySpot;
+        [SerializeField] private GameObject _randomBoostEmptySpot;
+        [SerializeField] private GameObject _luckEmptySpot;
+        [SerializeField] private GameObject _autoClickEmptySpot;
+        [SerializeField] private GameObject _discountEmptySpot;
+        [SerializeField] private GameObject _teamSpiritEmptySpot;
+        [SerializeField] private GameObject _moneyDoublerEmptySpot;
+        [SerializeField] private GameObject _speedSlowEmptySpot;
+        
+        [Header("Passives")]
+        [SerializeField] private GameObject _incomePassive;
+        [SerializeField] private GameObject _ratePassive;
+        [SerializeField] private GameObject _randomBoostPassive;
+        [SerializeField] private GameObject _luckPassive;
+        [SerializeField] private GameObject _autoClickPassive;
+        [SerializeField] private GameObject _discountPassive;
+        [SerializeField] private GameObject _teamSpiritPassive;
+        [SerializeField] private GameObject _moneyDoublerPassive;
+        [SerializeField] private GameObject _speedSlowPassive;
+        
         [Header("Other")] [SerializeField] private TMP_Text _debtText;
         
         private readonly float _defaultIncome = 1f;
@@ -66,6 +89,12 @@ namespace Main.Scripts
             {
                 Popup.Instance.AddText($"+{Math.Round(amount, 1) * 100}%", _incomeText.transform.position, Color.white);
             }
+
+            if (_incomePassive.gameObject.activeInHierarchy == false)
+            {
+                _incomePassive.gameObject.SetActive(true);
+                _incomeEmptySpot.SetActive(false);
+            }
         }
         
         public void UpdateRateBoost(float amount)
@@ -79,6 +108,12 @@ namespace Main.Scripts
             if (_rateText.gameObject.activeInHierarchy)
             {
                 Popup.Instance.AddText($"+{Math.Round(amount, 1) * 100}%", _rateText.transform.position, Color.white);
+            }
+            
+            if (_ratePassive.gameObject.activeInHierarchy == false)
+            {
+                _ratePassive.gameObject.SetActive(true);
+                _rateEmptySpot.SetActive(false);
             }
         }
 
@@ -96,6 +131,12 @@ namespace Main.Scripts
             {
                 Popup.Instance.AddText("+1%", _randomBoostText.transform.position, Color.white);
             }
+            
+            if (_randomBoostPassive.gameObject.activeInHierarchy == false)
+            {
+                _randomBoostPassive.gameObject.SetActive(true);
+                _randomBoostEmptySpot.SetActive(false);
+            }
         }
 
         public void UpdateLuck(int luck)
@@ -105,6 +146,12 @@ namespace Main.Scripts
             if (_luckText.gameObject.activeInHierarchy)
             {
                 Popup.Instance.AddText("+1", _luckText.transform.position, Color.white);
+            }
+            
+            if (_luckPassive.gameObject.activeInHierarchy == false)
+            {
+                _luckPassive.gameObject.SetActive(true);
+                _luckEmptySpot.SetActive(false);
             }
         }
 
@@ -120,6 +167,12 @@ namespace Main.Scripts
             {
                 Popup.Instance.AddText("+1%", _luckText.transform.position, Color.white);
             }
+            
+            if (_autoClickPassive.gameObject.activeInHierarchy == false)
+            {
+                _autoClickPassive.gameObject.SetActive(true);
+                _autoClickEmptySpot.SetActive(false);
+            }
         }
 
         public void UpdateDiscount(int i)
@@ -133,6 +186,12 @@ namespace Main.Scripts
             if (_luckText.gameObject.activeInHierarchy)
             {
                 Popup.Instance.AddText("-1%", _luckText.transform.position, Color.white);
+            }
+            
+            if (_discountPassive.gameObject.activeInHierarchy == false)
+            {
+                _discountPassive.gameObject.SetActive(true);
+                _discountEmptySpot.SetActive(false);
             }
         }
 
@@ -148,6 +207,12 @@ namespace Main.Scripts
             {
                 Popup.Instance.AddText("+1%", _teamSpiritText.transform.position, Color.white);
             }
+            
+            if (_teamSpiritPassive.gameObject.activeInHierarchy == false)
+            {
+                _teamSpiritPassive.gameObject.SetActive(true);
+                _teamSpiritEmptySpot.SetActive(false);
+            }
         }
 
         public void DoubleDebt()
@@ -162,6 +227,12 @@ namespace Main.Scripts
             {
                 Popup.Instance.AddText("Debt doubled!!", _moneyDoublerText.transform.position, Color.red);
             }
+            
+            if (_moneyDoublerPassive.gameObject.activeInHierarchy == false)
+            {
+                _moneyDoublerPassive.gameObject.SetActive(true);
+                _moneyDoublerEmptySpot.SetActive(false);
+            }
         }
 
         public void UpdateLuckToken(int i)
@@ -173,6 +244,12 @@ namespace Main.Scripts
             if (_speedSlowText.gameObject.activeInHierarchy)
             {
                 Popup.Instance.AddText("+1%", _speedSlowText.transform.position, Color.white);
+            }
+            
+            if (_speedSlowPassive.gameObject.activeInHierarchy == false)
+            {
+                _speedSlowPassive.gameObject.SetActive(true);
+                _speedSlowEmptySpot.SetActive(false);
             }
         }
     }

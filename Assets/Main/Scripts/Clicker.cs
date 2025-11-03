@@ -129,7 +129,7 @@ namespace Main.Scripts
            
            Vector2 randPos = new Vector2(transform.position.x + Random.Range(-100,100) / 100f, transform.position.y + Random.Range(-100,100) / 100f);
 
-           if (_hungretClicksImage.gameObject.activeInHierarchy)
+           if (_buttonProgressImage.gameObject.activeInHierarchy)
            {
                Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", randPos, Color.green);
            }

@@ -21,11 +21,11 @@ namespace Main.Scripts
             _startOfDay = 359;
             _endOfDay = 1400;
             
-            _currentDay = 0;
+            _currentDay = 1;
             _time = _startOfDay;
             
             _text.text = "6:00";
-            _daysText.text = "Day: 0";
+            _daysText.text = "01.11.2025";
         }
 
         private void Update()
@@ -74,7 +74,7 @@ namespace Main.Scripts
         public void NextDay()
         {
             _currentDay++;
-            _daysText.text = "Day: " + _currentDay;
+            _daysText.text = $"0{_currentDay}.11.2025";
         }
     }
 }

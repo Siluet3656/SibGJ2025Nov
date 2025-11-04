@@ -4,6 +4,10 @@ namespace Main.Scripts
 {
     public class Gambling : MonoBehaviour
     {
+        [SerializeField] private AudioSource _norm;
+        [SerializeField] private AudioSource _rare;
+        [SerializeField] private AudioSource _curse;
+        
         private int _luck;
 
         private void Awake()
@@ -64,6 +68,8 @@ namespace Main.Scripts
 
         private void Cursed()
         {
+            _curse.Play();
+            
             int rand = Random.Range(0, 100); // Reclaimed Memory Chip 0-5 (+500% income buy doubles your debts ) // Synthetic Luck Token (Time slow/speed up each 10 sec) 6 - 100
             
             if (rand <= 5)
@@ -87,6 +93,8 @@ namespace Main.Scripts
 
         private void Rare()
         {
+            _rare.Play();
+            
             int rand = Random.Range(0, 100); // Corporate Mantra Chip(Mult boost chance) 0-50 / Productivity Halo(Random chance to auto-click 5x) 51-85
                                              // Focus Stickers(reduces shop cost) 86-99 / Team Spirit Bonus (+1% for every 100 clicks) 99-100
                                                                
@@ -110,6 +118,8 @@ namespace Main.Scripts
 
         private void Normal()
         {
+            _norm.Play();
+            
             int rand = Random.Range(0, 100); // Coffee(Income) 0-80 / EnergyDrink(Rate) 81-85 / Clover(Luck) 86-100
             
             if (rand <= 72)

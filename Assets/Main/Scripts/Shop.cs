@@ -27,11 +27,16 @@ namespace Main.Scripts
         [SerializeField] private GameObject _documentsBoughtText;
         [SerializeField] private TMP_Text _documentsCostText;
         
+        [Header("COST")]
         [SerializeField] private int _defaultAutoClickCost = 500;
         [SerializeField] private int _defaultVpnCost = 5000;
         [SerializeField] private int _defaultShokerCost = 50000;
         [SerializeField] private int _defaultDocumentCost = 1000000;
 
+        [Header("SOUND")]
+        [SerializeField] private AudioSource _audioSourcePay;
+        [SerializeField] private AudioSource _audioSourceSosi;
+        
         private int _currentAutoClickCost;
         private int _currentVpnCost;
         private int _currentShokerCost;
@@ -62,10 +67,12 @@ namespace Main.Scripts
                 _clicker.SetAutoClick();   
                 
                 Popup.Instance.AddText("Purchased", _autoClickerButton.transform.position, Color.green);
+                _audioSourcePay.Play();
             }
             else
             {
                 Popup.Instance.AddText("Not enough money to buy", _autoClickerButton.transform.position, Color.red);
+                _audioSourceSosi.Play();
             }
         }
 
@@ -81,10 +88,12 @@ namespace Main.Scripts
                 G.VPN.ALVAWEAWEAWAWRAWAWR = true;
                 
                 Popup.Instance.AddText("Purchased", _vpnButton.transform.position, Color.green);
+                _audioSourcePay.Play();
             }
             else
             {
                 Popup.Instance.AddText("Not enough money to buy", _vpnButton.transform.position, Color.red);
+                _audioSourceSosi.Play();
             }
         }
         
@@ -100,10 +109,12 @@ namespace Main.Scripts
                 G.SHOKER.SFASJFPAOPGGOP = true;
                 
                 Popup.Instance.AddText("Purchased", _shokerButton.transform.position, Color.green);
+                _audioSourcePay.Play();
             }
             else
             {
                 Popup.Instance.AddText("Not enough money to buy", _shokerButton.transform.position, Color.red);
+                _audioSourceSosi.Play();
             }
         }
         
@@ -119,10 +130,12 @@ namespace Main.Scripts
                 G.DOCUMENTSAJIFAJIOFJI.AHAHAHAHAHAHAHAAH = true;
                 
                 Popup.Instance.AddText("Purchased", _documentsButton.transform.position, Color.green);
+                _audioSourcePay.Play();
             }
             else
             {
                 Popup.Instance.AddText("Not enough money to buy", _documentsButton.transform.position, Color.red);
+                _audioSourceSosi.Play();
             }
         }
     }

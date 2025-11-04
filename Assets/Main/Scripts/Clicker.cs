@@ -12,6 +12,10 @@ namespace Main.Scripts
        [SerializeField] private TMP_Text _moneyText;
        [SerializeField] private Image _hungretClicksImage;
        [SerializeField] private GameObject _pasivesEmptySpotsHolder;
+
+       [Header("Audio")] 
+       [SerializeField] private AudioSource _BTN;
+       [SerializeField] private AudioSource _MoneyGAIN;
        
        private MoneyBag _moneyBag;
        
@@ -66,6 +70,9 @@ namespace Main.Scripts
 
        private IEnumerator ButtonProgressRoutine()
        {
+           if (_buttonProgressImage.gameObject.activeInHierarchy)
+               _BTN.Play();
+           
            float progress = 0;
            _buttonProgressImage.fillAmount = 0f;
            _buttonPressed = true;
@@ -142,6 +149,7 @@ namespace Main.Scripts
            if (_buttonProgressImage.gameObject.activeInHierarchy)
            {
                Popup.Instance.AddText($"+{_moneyIncome * multiplier}$", randPos, Color.green);
+               _MoneyGAIN.Play();
            }
 
            int rand = Random.Range(0, 100);

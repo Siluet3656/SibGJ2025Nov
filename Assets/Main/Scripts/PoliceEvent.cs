@@ -27,6 +27,9 @@ namespace Main.Scripts
         [SerializeField] private UnityEngine.UI.Button _payButton;
         [SerializeField] public UnityEngine.UI.Button _shockerButton;
 
+        [Header("Sound")] [SerializeField] private AudioSource _buy;
+        [SerializeField] private AudioSource nobut;
+
 
         private Clicker _clicker;
         private bool _eventActive;
@@ -158,7 +161,12 @@ namespace Main.Scripts
             if (!_paid)
             {
                 Debug.Log("Player failed the Police Event!");
+                nobut.Play();
                 // Здесь можно вызвать свою логику смерти
+            }
+            else
+            {
+                _buy.Play();
             }
 
             _eventActive = false;

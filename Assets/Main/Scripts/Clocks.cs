@@ -21,6 +21,9 @@ namespace Main.Scripts
         [SerializeField] private int _timeShift = 8;          // игровая скорость
         [SerializeField] private int _speedSlowPercent = 0;   // замедление/ускорение в %
 
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioSource _amnient;
+        
         private bool _isSlowed;
         private float _timer;
         private int _time;
@@ -40,7 +43,7 @@ namespace Main.Scripts
         private bool anonomSecond;
         private bool _anonomTrid;
         private bool _anoimLAST;
-
+        private bool START = true;
 
         private void Awake()
         {
@@ -108,6 +111,27 @@ namespace Main.Scripts
             }
 
             // --- Сообщения Андрея ---
+
+            if (START)
+            {
+                G.MailSystem.ReceiveMail(
+                    "HR Department",
+                    "Welcome",
+                    "Welcome to Щ Market, valued employee!\nWe're thrilled to have you join our growing family of dedicated workers. Your productivity defines your worth, and your worth defines our success.\n" +
+                    "Remember: every click matters!"
+                );
+
+                G.MailSystem.ReceiveMail(
+                    "CEO",
+                    "Project Update",
+                    "Welcome aboard.\n\nYour workstation is now linked to the main productivity stream. " +
+                    "Click the terminal to generate units. Units generate value. Value ensures the stability of your employment.\n" +
+                    "Keep your metrics positive. The system observes everything."
+                );
+                
+                START = false;
+            }
+            
             if (_time > _startOfDay + 30 * _timeShift && !_andreyFirstMessage && _currentDay == 1)
             {
                 G.MailSystem.ReceiveMail( "Andrey (Dept. 4)", "Hey, new guy", "Hey, Konstantin!\n" + "Welcome to the pit. I saw your name pop up on the system logs — guess you’re the new recruit. " + "Don’t worry, it’s not as bad as it looks. (Mostly.)\n" + 
@@ -238,6 +262,7 @@ namespace Main.Scripts
         private IEnumerator EndDaySequence()
         {
             G.GameState = GameState.Night;
+            _amnient.Stop();
             G.Clicker.STOP();
             _time = _startOfDay; // сбрасываем время заранее, чтобы не зациклить Update
             yield return StartCoroutine(G.ScreenFader.FadeOut()); // затемнение
@@ -281,6 +306,9 @@ namespace Main.Scripts
 
         public void NextDay()
         {
+            _audioSource.Play();
+            _amnient.Play();
+            
             _currentDay++;
             _time = _startOfDay;
             int hours = Mathf.FloorToInt(_time / 60);

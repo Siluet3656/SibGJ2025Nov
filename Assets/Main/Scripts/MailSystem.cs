@@ -33,6 +33,9 @@ public class MailSystem : MonoBehaviour
 
     [Header("Data")]
     public List<MailMessage> inbox = new List<MailMessage>();
+    
+    [Header("SOUND")]
+    [SerializeField] private AudioSource audioSource;
 
     public event Action<MailMessage> OnMailReceived;
 
@@ -44,20 +47,7 @@ public class MailSystem : MonoBehaviour
     void Start()
     {
         // Для теста — добавим пару писем
-        G.MailSystem.ReceiveMail(
-            "HR Department",
-            "Welcome",
-            "Welcome to Щ Market, valued employee!\nWe're thrilled to have you join our growing family of dedicated workers. Your productivity defines your worth, and your worth defines our success.\n" +
-            "Remember: every click matters!"
-        );
-
-        G.MailSystem.ReceiveMail(
-            "CEO",
-            "Project Update",
-            "Welcome aboard.\n\nYour workstation is now linked to the main productivity stream. " +
-            "Click the terminal to generate units. Units generate value. Value ensures the stability of your employment.\n" +
-            "Keep your metrics positive. The system observes everything."
-        );
+        
     }
 
     public void ReceiveMail(string sender, string subject, string body)
@@ -68,6 +58,7 @@ public class MailSystem : MonoBehaviour
 
         CreateMailButton(inbox.Count - 1);
         //Debug.Log($"📬 Новое письмо от {sender}: {subject}");
+        audioSource.Play();
     }
 
     void CreateMailButton(int index)

@@ -219,7 +219,7 @@ namespace Main.Scripts
         {
             _debtAmount *= 2;
             
-            _debtText.text = $"{_debtAmount}$";
+            _debtText.text = $"DEBT = {_debtAmount}$";
             
             _moneyDoublerText.text = $"x{_debtAmount / 1000000000} debt";
 

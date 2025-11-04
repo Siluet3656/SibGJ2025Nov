@@ -97,7 +97,7 @@ namespace Main.Scripts
                 _shokerButton.SetActive(false);
                 _shokerBoughtText.SetActive(true);
 
-                //G.VPN.ALVAWEAWEAWAWRAWAWR = true;
+                G.SHOKER.SFASJFPAOPGGOP = true;
                 
                 Popup.Instance.AddText("Purchased", _shokerButton.transform.position, Color.green);
             }
@@ -116,7 +116,7 @@ namespace Main.Scripts
                 _documentsButton.SetActive(false);
                 _documentsBoughtText.SetActive(true);
 
-                //G.VPN.ALVAWEAWEAWAWRAWAWR = true;
+                G.DOCUMENTSAJIFAJIOFJI.AHAHAHAHAHAHAHAAH = true;
                 
                 Popup.Instance.AddText("Purchased", _documentsButton.transform.position, Color.green);
             }

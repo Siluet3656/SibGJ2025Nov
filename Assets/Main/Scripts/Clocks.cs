@@ -142,7 +142,7 @@ namespace Main.Scripts
                 _anonimFirstMessage = true;
             }
             
-            if (_currentDay == 2 && _time > _startOfDay + 30 * _timeShift && !G.PoliceEventActive)
+            if (_currentDay == 2 && _time > _startOfDay + 30 * _timeShift && !G.PoliceEvent.IsActive)
             {
                 G.PoliceEvent.StartEvent();
             }
@@ -197,6 +197,7 @@ namespace Main.Scripts
                 );
 
                 _anonomTrid = true;
+                //G.PoliceEvent.StartEvent2();
             }
 
             if (_time > _startOfDay + 75 * _timeShift && !_anoimLAST && _currentDay == 4)
@@ -297,6 +298,18 @@ namespace Main.Scripts
                 if (G.PoliceEvent.IsPaid == false)
                 {
                     SceneManager.LoadScene(1);
+                }
+            }
+
+            if (_currentDay == 5)
+            {
+                if (G.DOCUMENTSAJIFAJIOFJI.AHAHAHAHAHAHAHAAH)
+                {
+                    SceneManager.LoadScene(3);
+                }
+                else
+                {
+                    SceneManager.LoadScene(2);
                 }
             }
         }

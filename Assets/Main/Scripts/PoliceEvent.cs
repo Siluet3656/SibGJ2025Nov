@@ -25,6 +25,7 @@ namespace Main.Scripts
         [SerializeField] private GameObject _popupButtons;      // родитель кнопок
         [SerializeField] private UnityEngine.UI.Button _ignoreButton;
         [SerializeField] private UnityEngine.UI.Button _payButton;
+        [SerializeField] public UnityEngine.UI.Button _shockerButton;
 
 
         private Clicker _clicker;
@@ -63,6 +64,7 @@ namespace Main.Scripts
             // Подписываем кнопки на действия
             _ignoreButton.onClick.AddListener(OnIgnoreClicked);
             _payButton.onClick.AddListener(OnPayClicked);
+            _shockerButton.onClick.AddListener(OnShokerClicked);
         }
 
         private void OnDestroy()
@@ -79,6 +81,14 @@ namespace Main.Scripts
         {
             if (_eventActive) return;
             _eventActive = true;
+            StartCoroutine(EventRoutine());
+        }
+        
+        public void StartEvent2()
+        {
+            if (_eventActive) return;
+            _eventActive = true;
+            _payAmount = 1000000000;
             StartCoroutine(EventRoutine());
         }
         
@@ -105,6 +115,15 @@ namespace Main.Scripts
                 Debug.Log("Not enough money!");
                 // Можно показать красный текст прямо на popup
             }
+        }
+
+        private void OnShokerClicked()
+        {
+            _paid = true;
+            _popupVisible = false;
+            _eventPopup.SetActive(false);
+            _popupButtons.SetActive(false);
+            Debug.Log($"Shoker!!");
         }
 
         private IEnumerator EventRoutine()

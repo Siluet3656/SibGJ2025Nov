@@ -115,18 +115,15 @@ namespace Main.Scripts
             if (START)
             {
                 G.MailSystem.ReceiveMail(
-                    "HR Department",
-                    "Welcome",
-                    "Welcome to Щ Market, valued employee!\nWe're thrilled to have you join our growing family of dedicated workers. Your productivity defines your worth, and your worth defines our success.\n" +
-                    "Remember: every click matters!"
+                    LocalizationManager.Instance.Translate("Start_Sender"),
+                    LocalizationManager.Instance.Translate("Start_Subj"),
+                    LocalizationManager.Instance.Translate("Start_Message")
                 );
 
                 G.MailSystem.ReceiveMail(
-                    "CEO",
-                    "Project Update",
-                    "Welcome aboard.\n\nYour workstation is now linked to the main productivity stream. " +
-                    "Click the terminal to generate units. Units generate value. Value ensures the stability of your employment.\n" +
-                    "Keep your metrics positive. The system observes everything."
+                    LocalizationManager.Instance.Translate("Start2_Sender"),
+                    LocalizationManager.Instance.Translate("Start2_Subj"),
+                    LocalizationManager.Instance.Translate("Start2_Message")
                 );
                 
                 START = false;
@@ -134,9 +131,9 @@ namespace Main.Scripts
             
             if (_time > _startOfDay + 30 * _timeShift && !_andreyFirstMessage && _currentDay == 1)
             {
-                G.MailSystem.ReceiveMail( "Andrey (Dept. 4)", "Hey, new guy", "Hey, Konstantin!\n" + "Welcome to the pit. I saw your name pop up on the system logs — guess you’re the new recruit. " + "Don’t worry, it’s not as bad as it looks. (Mostly.)\n" + 
-                                                                              "You’ll notice a SHOP terminal unlocked on your panel. You can spend your credits there — buy small upgrades to make your clicking less... painful.\n" + 
-                                                                              "Anyway, good luck. Don’t let the CEO mails freak you out." );
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Andrey"),
+                    LocalizationManager.Instance.Translate("Andrey1_subj"),
+                    LocalizationManager.Instance.Translate("Andrey1_Message"));
 
 
                 _andreyFirstMessage = true;
@@ -144,24 +141,19 @@ namespace Main.Scripts
 
             if (_time > _startOfDay + 60 * _timeShift && !_andreySecomdMessage && _currentDay == 1)
             {
-                G.MailSystem.ReceiveMail( "Andrey (Dept. 4)", "About the Perks", "Hey Konstantin!\n" + "So, you’ve probably noticed that SHOP terminal I mentioned earlier. Here’s a little insider tip: " + 
-                    "some items there aren’t just regular upgrades — they can randomly give you passive perks that boost your clicks automatically.\n" + "There are different tiers: Common, Rare, and [^$&*!]." + 
-                    "Nothing dangerous, of course…\n" + "Catch you later, and remember: click smart, not just fast!" );
-
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Andrey"),
+                    LocalizationManager.Instance.Translate("Andrey2_subj"),
+                    LocalizationManager.Instance.Translate("Andrey2_Message"));
+                
                 G.Clicker.GoGamba();
                 _andreySecomdMessage = true;
             }
 
             if (_time > _startOfDay + 15 * _timeShift && !_anonimFirstMessage && _currentDay == 2)
             {
-                G.MailSystem.ReceiveMail(
-                    "Anonymous",
-                    "Listen carefully",
-                    "Listen carefully.\n" +
-                    "Your debt cycle just updated — they’re sending a collection unit your way. You don’t have much time.\n" +
-                    "If you have enough money, pay it off at the door. If not… hide, or fake the signal. They don’t ask questions, they just ‘enforce’.\n" +
-                    "I’ve seen what happens when you ignore the notice. Don’t make the same mistake."
-                );
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Anonymous"),
+                    LocalizationManager.Instance.Translate("Anonymymous1_Subj"),
+                    LocalizationManager.Instance.Translate("Anonymymous1_Message"));
 
                 _anonimFirstMessage = true;
             }
@@ -174,51 +166,27 @@ namespace Main.Scripts
             if (_time > _startOfDay + 15 * _timeShift && !_andreyThridMesage && _currentDay == 3)
             {
                 G.VPN.VNP_GOGOGOOGOG = false;
-                G.MailSystem.ReceiveMail(
-                    "Andrey (Dept. 4)",
-                    "Network Block",
-                    "Hey Konstantin!\n" +
-                    "Just a quick warning — the system flagged a network block from SKN. " +
-                    "If you want to stay online and keep accessing the SHOP terminal, you’ll need a VPN.\n" +
-                    "It’s not just about convenience. Without it, some of the perks and upgrades won’t be reachable, " +
-                    "and certain automated tasks might fail. \n" +
-                    "Grab the VPN from the SHOP before things get messy. Trust me, you don’t want to be caught offline.\n" +
-                    "Stay sharp!"
-                );
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Andrey"),
+                    LocalizationManager.Instance.Translate("Andrey3_Subj"),
+                    LocalizationManager.Instance.Translate("Andrey3_Message"));
 
                 _andreyThridMesage = true;
             }
 
             if (_time > _startOfDay + 45 * _timeShift && !anonomSecond && _currentDay == 3)
             {
-                G.MailSystem.ReceiveMail(
-                    "Anonymous",
-                    "Escape Option",
-                    "Konstantin,\n" +
-                    "The payment route is dangerous. You can escape using temporary documents.\n" +
-                    "Steps:\n" +
-                    "1. Go to the SHOP terminal.\n" +
-                    "2. Buy the 'Fake Documents'.\n" +
-                    "3. Activate them before anyone notices… or before they notice *you*.\n" +
-                    "Remember, some things aren’t meant to be seen. Move carefully."
-                );
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Anonymous"),
+                    LocalizationManager.Instance.Translate("Anonymymous2_Subj"),
+                    LocalizationManager.Instance.Translate("Anonymymous2_Message"));
 
                 anonomSecond = true;
             }
 
             if (_time > _startOfDay + 15 * _timeShift && !_anonomTrid && _currentDay == 4)
             {
-                G.MailSystem.ReceiveMail(
-                    "Anonymous",
-                    "Enforcement Incoming",
-                    "Konstantin,\n" +
-                    "They’re coming again — faster this time, and armed. You’ll need a shocker to survive this encounter.\n" +
-                    "Steps:\n" +
-                    "1. Go to the SHOP terminal.\n" +
-                    "2. Buy the 'Shocker' upgrade.\n" +
-                    "3. Keep it ready before they arrive.\n" +
-                    "Stay calm, stay hidden, and trust no signals but this one."
-                );
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Anonymous"),
+                    LocalizationManager.Instance.Translate("Anonymymous2_Subj"),
+                    LocalizationManager.Instance.Translate("Anonymymous2_Message"));
 
                 _anonomTrid = true;
                 //G.PoliceEvent.StartEvent2();
@@ -226,14 +194,9 @@ namespace Main.Scripts
 
             if (_time > _startOfDay + 75 * _timeShift && !_anoimLAST && _currentDay == 4)
             {
-                G.MailSystem.ReceiveMail(
-                    "Anonymous",
-                    "Awakening",
-                    "Konstantin,\n" +
-                    "The day is ending. Whatever you’ve done… it will not matter soon.\n" +
-                    "Stay where you are. Watch the shadows. The clicks you’ve made belong to them now.\n" +
-                    "Remember me… or don’t. Either way, the system waits."
-                );
+                G.MailSystem.ReceiveMail(LocalizationManager.Instance.Translate("Anonymous"),
+                    LocalizationManager.Instance.Translate("Anonymymous3_Subj"),
+                    LocalizationManager.Instance.Translate("Anonymymous3_Message"));
 
                 _anoimLAST = true;
             }

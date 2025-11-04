@@ -123,7 +123,7 @@ namespace Main.Scripts
                }
            }
 
-           if (_isGambling)
+           if (_isGambling && G.VPN.VNP_GOGOGOOGOG)
            {
                G.Gambling.Gamba();
            }

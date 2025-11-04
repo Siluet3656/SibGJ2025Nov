@@ -36,7 +36,11 @@ namespace Main.Scripts
         private bool _clicked;
         
         private bool _anonimFirstMessage = false;
-        
+        private bool _andreyThridMesage;
+        private bool anonomSecond;
+        private bool _anonomTrid;
+        private bool _anoimLAST;
+
 
         private void Awake()
         {
@@ -143,6 +147,71 @@ namespace Main.Scripts
                 G.PoliceEvent.StartEvent();
             }
 
+            if (_time > _startOfDay + 15 * _timeShift && !_andreyThridMesage && _currentDay == 3)
+            {
+                G.VPN.VNP_GOGOGOOGOG = false;
+                G.MailSystem.ReceiveMail(
+                    "Andrey (Dept. 4)",
+                    "Network Block",
+                    "Hey Konstantin!\n" +
+                    "Just a quick warning — the system flagged a network block from SKN. " +
+                    "If you want to stay online and keep accessing the SHOP terminal, you’ll need a VPN.\n" +
+                    "It’s not just about convenience. Without it, some of the perks and upgrades won’t be reachable, " +
+                    "and certain automated tasks might fail. \n" +
+                    "Grab the VPN from the SHOP before things get messy. Trust me, you don’t want to be caught offline.\n" +
+                    "Stay sharp!"
+                );
+
+                _andreyThridMesage = true;
+            }
+
+            if (_time > _startOfDay + 45 * _timeShift && !anonomSecond && _currentDay == 3)
+            {
+                G.MailSystem.ReceiveMail(
+                    "Anonymous",
+                    "Escape Option",
+                    "Konstantin,\n" +
+                    "The payment route is dangerous. You can escape using temporary documents.\n" +
+                    "Steps:\n" +
+                    "1. Go to the SHOP terminal.\n" +
+                    "2. Buy the 'Fake Documents'.\n" +
+                    "3. Activate them before anyone notices… or before they notice *you*.\n" +
+                    "Remember, some things aren’t meant to be seen. Move carefully."
+                );
+
+                anonomSecond = true;
+            }
+
+            if (_time > _startOfDay + 15 * _timeShift && !_anonomTrid && _currentDay == 4)
+            {
+                G.MailSystem.ReceiveMail(
+                    "Anonymous",
+                    "Enforcement Incoming",
+                    "Konstantin,\n" +
+                    "They’re coming again — faster this time, and armed. You’ll need a shocker to survive this encounter.\n" +
+                    "Steps:\n" +
+                    "1. Go to the SHOP terminal.\n" +
+                    "2. Buy the 'Shocker' upgrade.\n" +
+                    "3. Keep it ready before they arrive.\n" +
+                    "Stay calm, stay hidden, and trust no signals but this one."
+                );
+
+                _anonomTrid = true;
+            }
+
+            if (_time > _startOfDay + 75 * _timeShift && !_anoimLAST && _currentDay == 4)
+            {
+                G.MailSystem.ReceiveMail(
+                    "Anonymous",
+                    "Awakening",
+                    "Konstantin,\n" +
+                    "The day is ending. Whatever you’ve done… it will not matter soon.\n" +
+                    "Stay where you are. Watch the shadows. The clicks you’ve made belong to them now.\n" +
+                    "Remember me… or don’t. Either way, the system waits."
+                );
+
+                _anoimLAST = true;
+            }
         }
 
         private void ApplySpeedChange()

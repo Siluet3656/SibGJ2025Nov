@@ -1,4 +1,5 @@
 ﻿using Main.Scripts;
+using UnityEngine;
 
 public static class G
 {
@@ -14,4 +15,6 @@ public static class G
     public static PoliceEvent PoliceEvent;
     public static VPN VPN;
     public static SHOKER SHOKER;
+
+    public static SystemLanguage SystemLanguage;
 }

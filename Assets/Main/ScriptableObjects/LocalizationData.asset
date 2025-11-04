@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f74b30e91a97b4f8aa3ed7f8ccdfd6, type: 3}
+  m_Name: LocalizationData
+  m_EditorClassIdentifier: 
+  entries:
+  - key: Start_Sender
+    english: HR Department
+    russian: 
+  - key: Start_Subj
+    english: Welcome
+    russian: 
+  - key: Start_Message
+    english: "Welcome to \u0429 Market, valued employee!\\nWe're thrilled to have
+      you join our growing family of dedicated workers. Your productivity defines
+      your worth, and your worth defines our success.\\nRemember: every click matters!"
+    russian: 
+  - key: Start2_Sender
+    english: CEO
+    russian: 
+  - key: Start2_Subj
+    english: Project Update
+    russian: 
+  - key: Start2_Message
+    english: Welcome aboard.\n\nYour workstation is now linked to the main productivity
+      stream. Click the terminal to generate units. Units generate value. Value ensures
+      the stability of your employment.\nKeep your metrics positive. The system observes
+      everything.
+    russian: 
+  - key: Andrey
+    english: Andrey (Dept. 4)
+    russian: 
+  - key: Andrey1_subj
+    english: Hey, new guy
+    russian: 
+  - key: Andrey1_Message
+    english: "Hey, Konstantin!\\n\" + \"Welcome to the pit. I saw your name pop up
+      on the system logs \u2014 guess you\u2019re the new recruit. Don\u2019t worry,
+      it\u2019s not as bad as it looks. (Mostly.)\\nYou\u2019ll notice a SHOP terminal
+      unlocked on your panel. You can spend your credits there \u2014 buy small upgrades
+      to make your clicking less... painful.\\nAnyway, good luck. Don\u2019t let
+      the CEO mails freak you out."
+    russian: 
+  - key: Andrey2_subj
+    english: About the Perks
+    russian: 
+  - key: Andrey2_Message
+    english: "Hey Konstantin!\\nSo, you\u2019ve probably noticed that SHOP terminal
+      I mentioned earlier. Here\u2019s a little insider tip: some items there aren\u2019t
+      just regular upgrades \u2014 they can randomly give you passive perks that
+      boost your clicks automatically.\\nThere are different tiers: Common, Rare,
+      and [^$&*!]. Nothing dangerous, of course\u2026\\nCatch you later, and remember:
+      click smart, not just fast!"
+    russian: 
+  - key: Andrey3_Subj
+    english: Network Block
+    russian: 
+  - key: Anonymous
+    english: Anonymous
+    russian: 
+  - key: Anonymymous1_Subj
+    english: Listen carefully
+    russian: 
+  - key: Anonymymous1_Message
+    english: "Listen carefully.\\nYour debt cycle just updated \u2014 they\u2019re
+      sending a collection unit your way. You don\u2019t have much time.\\nIf you
+      have enough money, pay it off at the door. If not\u2026 hide, or fake the signal.
+      They don\u2019t ask questions, they just \u2018enforce\u2019.\\nI\u2019ve seen
+      what happens when you ignore the notice. Don\u2019t make the same mistake."
+    russian: 
+  - key: Anonymymous2_Subj
+    english: Escape Option
+    russian: 
+  - key: Anonymymous2_Message
+    english: "Konstantin,\\nThe payment route is dangerous. You can escape using
+      temporary documents.\\nSteps:\\n1. Go to the SHOP terminal.\\n2. Buy the 'Fake
+      Documents'.\\n3. Activate them before anyone notices\u2026 or before they notice
+      *you*.\\nRemember, some things aren\u2019t meant to be seen. Move carefully."
+    russian: 
+  - key: Anonymymous3_Subj
+    english: Enforcement Incoming
+    russian: 
+  - key: Anonymymous3_Message
+    english: "Konstantin,\\nThey\u2019re coming again \u2014 faster this time, and
+      armed. You\u2019ll need a shocker to survive this encounter.\\n\"Steps:\\n1.
+      Go to the SHOP terminal.\\n2. Buy the 'Shocker' upgrade.\\n3. Keep it ready
+      before they arrive.\\nStay calm, stay hidden, and trust no signals but this
+      one."
+    russian: 
+  - key: Anonymymous4_Subj
+    english: Awakening
+    russian: 
+  - key: Anonymymous4_Message
+    english: "Konstantin,\\nThe day is ending. Whatever you\u2019ve done\u2026 it
+      will not matter soon.\\nStay where you are. Watch the shadows. The clicks you\u2019ve
+      made belong to them now.\\nRemember me\u2026 or don\u2019t. Either way, the
+      system waits."
+    russian: 

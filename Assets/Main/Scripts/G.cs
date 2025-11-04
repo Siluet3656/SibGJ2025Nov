@@ -7,4 +7,6 @@ public static class G
     public static Gambling Gambling;
     public static MailSystem MailSystem;
     public static ScreenFader ScreenFader;
+
+    public static GameState GameState;
 }

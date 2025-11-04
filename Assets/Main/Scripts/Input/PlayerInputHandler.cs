@@ -30,7 +30,7 @@ namespace Main.Scripts.Input
 
         private void OnLBM(InputAction.CallbackContext obj)
         {
-            
+            OnLeftClick?.Invoke();
         }
         
         private void OnSpeedUp(InputAction.CallbackContext obj)
@@ -42,5 +42,7 @@ namespace Main.Scripts.Input
         {
             _debugger.DefaultTimeScale();
         }
+        
+        public event System.Action OnLeftClick;
     }
 }

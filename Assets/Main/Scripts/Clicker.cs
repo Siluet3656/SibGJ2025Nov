@@ -46,6 +46,8 @@ namespace Main.Scripts
 
        private void Update()
        {
+           if (G.GameState == GameState.Night) return;
+           
            if (_isAutoClick)
            {
                if (_buttonPressed == false)

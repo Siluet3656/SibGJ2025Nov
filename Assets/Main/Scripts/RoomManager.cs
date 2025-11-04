@@ -38,9 +38,9 @@ public class RoomManager : MonoBehaviour
     private IEnumerator WaitFade()
     {
         yield return null;
-        yield return new WaitUntil(() => G.ScreenFader.IsFading == false);
+        //yield return new WaitUntil(() => G.ScreenFader.IsFading == false);
         
-        G.ScreenFader.FadeIn();
+        //G.ScreenFader.FadeIn();
         
         ROOM.SetActive(false);
         

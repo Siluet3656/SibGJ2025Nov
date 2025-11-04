@@ -30,7 +30,7 @@ public class ScreenFader : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FadeIn());
+        //StartCoroutine(FadeIn());
     }
 
     public bool IsFading => _isFading;
@@ -50,7 +50,7 @@ public class ScreenFader : MonoBehaviour
         }
 
         _fadeImage.color = new Color(_fadeColor.r, _fadeColor.g, _fadeColor.b, 0f);
-        _fadeImage.gameObject.SetActive(false);
+        //_fadeImage.gameObject.SetActive(false);
 
         _isFading = false;
     }

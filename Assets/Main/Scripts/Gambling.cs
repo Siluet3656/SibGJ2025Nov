@@ -18,8 +18,8 @@ namespace Main.Scripts
             int rand = Random.Range(0, 100);
 
             // Базовые пороги (без удачи)
-            float junkChance = 43f;
-            float normalChance = 50f;
+            float junkChance = 23f;
+            float normalChance = 70f;
             float rareChance = 6f;
             float cursedChance = 1f; // фиксированный
 
@@ -27,10 +27,10 @@ namespace Main.Scripts
             float luckFactor = _luck / 100f;
 
             // junk уменьшается максимум до 10%
-            junkChance = Mathf.Lerp(43f, 15f, luckFactor);
+            junkChance = Mathf.Lerp(23f, 10f, luckFactor);
 
             // rare увеличивается максимум до 30%
-            rareChance = Mathf.Lerp(6f, 14f, luckFactor);
+            rareChance = Mathf.Lerp(6f, 25f, luckFactor);
 
             // normal пересчитывается, чтобы сумма была 100
             normalChance = 100f - (junkChance + rareChance + cursedChance);
@@ -98,7 +98,7 @@ namespace Main.Scripts
             {
                 UpdateHalo(1); 
             }
-            else if (rand <= 98)
+            else if (rand <= 96)
             {
                 UpdateFocus(1);  
             }
@@ -112,17 +112,17 @@ namespace Main.Scripts
         {
             int rand = Random.Range(0, 100); // Coffee(Income) 0-80 / EnergyDrink(Rate) 81-85 / Clover(Luck) 86-100
             
-            if (rand <= 80)
+            if (rand <= 72)
             {
-                int percent = Random.Range(10, 40);
+                int percent = Random.Range(10, 80);
                 
                 float fPercent = percent / 100f;
                 
                 UpdateCoffeeEfficiencyAmount(fPercent);
             }
-            else if (rand <= 86)
+            else if (rand <= 85)
             {
-                int percent = Random.Range(10, 20);
+                int percent = Random.Range(10, 40);
                 
                 float fPercent = percent / 100f;
 

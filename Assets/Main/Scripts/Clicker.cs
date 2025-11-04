@@ -18,7 +18,7 @@ namespace Main.Scripts
        private float _buttonTimeToEarn;
        
        private int _defaultIncome = 1;
-       private float _defaultTimeToEarn  = 2.5f;
+       private float _defaultTimeToEarn  = 1.5f;
        private int _moneyIncome;
        
        private bool _buttonPressed;
@@ -127,6 +127,8 @@ namespace Main.Scripts
            {
                G.Gambling.Gamba();
            }
+           
+           G.GameState = GameState.Day;
        }
 
        private void EarnMoney(int multiplier)
@@ -238,6 +240,13 @@ namespace Main.Scripts
        public void GoGamba()
        {
            _isGambling = true;
+       }
+
+       public void STOP()
+       {
+           StopAllCoroutines();
+           _buttonPressed = false;
+           _buttonProgressImage.fillAmount = 0f;
        }
     }
 }

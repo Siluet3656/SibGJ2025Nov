@@ -25,12 +25,22 @@ public class RoomManager : MonoBehaviour
     public void EnterZone(RoomZone zone)
     {
         currentZoneName = zone.zoneName;
-        Debug.Log($"🧭 Player entered zone: {zone.zoneName}");
+        //Debug.Log($"🧭 Player entered zone: {zone.zoneName}");
 
         switch (currentZoneName)
         {
             case "PC":
                 EnterPC();
+                break;
+            case "Door":
+                // Если событие полицейских активно — передаем нажатие
+                if (G.PoliceEvent.IsPaid == false)
+                {
+                    if (G.PoliceEvent != null && G.PoliceEvent.IsActive)
+                    {
+                        G.PoliceEvent.OnDoorClicked();
+                    }
+                }
                 break;
         }
     }

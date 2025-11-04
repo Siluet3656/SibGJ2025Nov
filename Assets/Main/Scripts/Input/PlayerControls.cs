@@ -27,6 +27,14 @@ namespace Main.Scripts.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e32c6d9-0948-43df-b4cc-fe9757953389"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -38,6 +46,17 @@ namespace Main.Scripts.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LBM"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b19e8bd-3ca0-426c-9c59-32b20f85c5ca"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -76,6 +95,7 @@ namespace Main.Scripts.Input
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_LBM = m_Player.FindAction("LBM", throwIfNotFound: true);
+            m_Player_Space = m_Player.FindAction("Space", throwIfNotFound: true);
             // Debug
             m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
             m_Debug_SpeedUp = m_Debug.FindAction("SpeedUp", throwIfNotFound: true);
@@ -129,11 +149,13 @@ namespace Main.Scripts.Input
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_LBM;
+        private readonly InputAction m_Player_Space;
         public struct PlayerActions
         {
             private @PlayerControls m_Wrapper;
             public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @LBM => m_Wrapper.m_Player_LBM;
+            public InputAction @Space => m_Wrapper.m_Player_Space;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -146,6 +168,9 @@ namespace Main.Scripts.Input
                     @LBM.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLBM;
                     @LBM.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLBM;
                     @LBM.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLBM;
+                    @Space.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpace;
+                    @Space.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpace;
+                    @Space.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpace;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -153,6 +178,9 @@ namespace Main.Scripts.Input
                     @LBM.started += instance.OnLBM;
                     @LBM.performed += instance.OnLBM;
                     @LBM.canceled += instance.OnLBM;
+                    @Space.started += instance.OnSpace;
+                    @Space.performed += instance.OnSpace;
+                    @Space.canceled += instance.OnSpace;
                 }
             }
         }
@@ -193,6 +221,7 @@ namespace Main.Scripts.Input
         public interface IPlayerActions
         {
             void OnLBM(InputAction.CallbackContext context);
+            void OnSpace(InputAction.CallbackContext context);
         }
         public interface IDebugActions
         {

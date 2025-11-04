@@ -3,6 +3,7 @@ using System.Collections;
 using Main.Scripts.Input;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Main.Scripts
 {
@@ -13,6 +14,7 @@ namespace Main.Scripts
         [SerializeField] private TMP_Text _daysText;   // Дата (01.11.2025)
         [SerializeField] private TMP_Text _dayBanner;  // Надпись "День N" посередине экрана
         [SerializeField] private PlayerInputHandler _input;
+        [SerializeField] private GameObject _arrow;
 
         [Header("Time Settings")]
         [SerializeField] private float _switchInterval = 10f; // каждые 10 секунд
@@ -32,16 +34,21 @@ namespace Main.Scripts
         private bool _andreyFirstMessage = false;
         private bool _andreySecomdMessage = false;
         private bool _clicked;
+        
+        private bool _anonimFirstMessage = false;
+        
 
         private void Awake()
         {
+            G.GameState = GameState.Night;
+            
             _startOfDay = 359;
             _endOfDay = 1400;
 
             _currentDay = 1;
             _time = _startOfDay;
 
-            _text.text = "6:00";
+            _text.text = "05:59";
             _daysText.text = "01.11.2025";
 
             if (_dayBanner != null)
@@ -97,28 +104,45 @@ namespace Main.Scripts
             }
 
             // --- Сообщения Андрея ---
-            if (_time > _startOfDay + 30 * _timeShift && !_andreyFirstMessage)
+            if (_time > _startOfDay + 30 * _timeShift && !_andreyFirstMessage && _currentDay == 1)
             {
-                G.MailSystem.ReceiveMail(
-                    "Andrey (Dept. 4)",
-                    "Hey, new guy",
-                    "Hey, Konstantin!\nWelcome to the pit..."
-                );
+                G.MailSystem.ReceiveMail( "Andrey (Dept. 4)", "Hey, new guy", "Hey, Konstantin!\n" + "Welcome to the pit. I saw your name pop up on the system logs — guess you’re the new recruit. " + "Don’t worry, it’s not as bad as it looks. (Mostly.)\n" + 
+                                                                              "You’ll notice a SHOP terminal unlocked on your panel. You can spend your credits there — buy small upgrades to make your clicking less... painful.\n" + 
+                                                                              "Anyway, good luck. Don’t let the CEO mails freak you out." );
+
 
                 _andreyFirstMessage = true;
             }
 
-            if (_time > _startOfDay + 60 * _timeShift && !_andreySecomdMessage)
+            if (_time > _startOfDay + 60 * _timeShift && !_andreySecomdMessage && _currentDay == 1)
             {
-                G.MailSystem.ReceiveMail(
-                    "Andrey (Dept. 4)",
-                    "About the Perks",
-                    "Hey Konstantin!\nSo, you’ve probably noticed..."
-                );
+                G.MailSystem.ReceiveMail( "Andrey (Dept. 4)", "About the Perks", "Hey Konstantin!\n" + "So, you’ve probably noticed that SHOP terminal I mentioned earlier. Here’s a little insider tip: " + 
+                    "some items there aren’t just regular upgrades — they can randomly give you passive perks that boost your clicks automatically.\n" + "There are different tiers: Common, Rare, and [^$&*!]." + 
+                    "Nothing dangerous, of course…\n" + "Catch you later, and remember: click smart, not just fast!" );
 
                 G.Clicker.GoGamba();
                 _andreySecomdMessage = true;
             }
+
+            if (_time > _startOfDay + 15 * _timeShift && !_anonimFirstMessage && _currentDay == 2)
+            {
+                G.MailSystem.ReceiveMail(
+                    "Anonymous",
+                    "Listen carefully",
+                    "Listen carefully.\n" +
+                    "Your debt cycle just updated — they’re sending a collection unit your way. You don’t have much time.\n" +
+                    "If you have enough money, pay it off at the door. If not… hide, or fake the signal. They don’t ask questions, they just ‘enforce’.\n" +
+                    "I’ve seen what happens when you ignore the notice. Don’t make the same mistake."
+                );
+
+                _anonimFirstMessage = true;
+            }
+            
+            if (_currentDay == 2 && _time > _startOfDay + 30 * _timeShift && !G.PoliceEventActive)
+            {
+                G.PoliceEvent.StartEvent();
+            }
+
         }
 
         private void ApplySpeedChange()
@@ -144,6 +168,7 @@ namespace Main.Scripts
         private IEnumerator EndDaySequence()
         {
             G.GameState = GameState.Night;
+            G.Clicker.STOP();
             _time = _startOfDay; // сбрасываем время заранее, чтобы не зациклить Update
             yield return StartCoroutine(G.ScreenFader.FadeOut()); // затемнение
 
@@ -172,7 +197,7 @@ namespace Main.Scripts
         {
             if (_dayBanner == null) yield break;
 
-            _dayBanner.text = $"ДЕНЬ {dayNumber}";
+            _dayBanner.text = $"DAY {dayNumber}";
             _dayBanner.gameObject.SetActive(true);
             _dayBanner.alpha = 1;
 
@@ -192,6 +217,19 @@ namespace Main.Scripts
             int minutes = Mathf.FloorToInt(_time % 60);
             _text.text = $"{hours:00}:{minutes:00}";
             _daysText.text = $"{_currentDay:00}.11.2025";
+
+            if (_currentDay == 2)
+            {
+                _arrow.SetActive(true);
+            }
+
+            if (_currentDay == 3)
+            {
+                if (G.PoliceEvent.IsPaid == false)
+                {
+                    SceneManager.LoadScene(1);
+                }
+            }
         }
     }
 }

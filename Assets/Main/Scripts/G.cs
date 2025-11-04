@@ -9,4 +9,6 @@ public static class G
     public static ScreenFader ScreenFader;
 
     public static GameState GameState;
+    public static bool PoliceEventActive { get; set; }
+    public static PoliceEvent PoliceEvent;
 }

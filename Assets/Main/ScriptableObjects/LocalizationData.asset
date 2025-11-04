@@ -105,3 +105,18 @@ MonoBehaviour:
       made belong to them now.\\nRemember me\u2026 or don\u2019t. Either way, the
       system waits."
     russian: 
+  - key: CurseName1
+    english: DELETED_USER
+    russian: 
+  - key: CurseName2
+    english: ???
+    russian: ???
+  - key: Curse_Subj
+    english: Cursed item
+    russian: 
+  - key: Curse_Message
+    english: "You shouldn\u2019t have pulled that one. The item... it\u2019s bound.
+      Don\u2019t trust the rewards. Don\u2019t trust the clicks. Leave the country
+      if you can. This isn\u2019t police business. THEY own everything. Leave before
+      THEY\u2014[DATA LOSS DETECTED]\u2014Q#$#@! they\u2019re already rewriting me\u2014QFQF#@!Q#@!"
+    russian: 

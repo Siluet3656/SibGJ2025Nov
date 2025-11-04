@@ -22,6 +22,6 @@ public class Restart : MonoBehaviour
 
         private void OnLBM(InputAction.CallbackContext obj)
         {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
         }
 }

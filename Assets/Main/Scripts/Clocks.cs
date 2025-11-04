@@ -288,7 +288,7 @@ namespace Main.Scripts
             {
                 if (G.PoliceEvent.IsPaid == false)
                 {
-                    SceneManager.LoadScene(1);
+                    SceneManager.LoadScene(2);
                 }
             }
 
@@ -296,11 +296,11 @@ namespace Main.Scripts
             {
                 if (G.DOCUMENTSAJIFAJIOFJI.AHAHAHAHAHAHAHAAH)
                 {
-                    SceneManager.LoadScene(3);
+                    SceneManager.LoadScene(4);
                 }
                 else
                 {
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(3);
                 }
             }
         }

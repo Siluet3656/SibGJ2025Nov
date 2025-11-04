@@ -5,9 +5,10 @@ using System.Collections.Generic;
 public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager Instance;
+    public static SystemLanguage currentLanguage;
 
     public LocalizationData data;
-    public SystemLanguage currentLanguage = G.SystemLanguage;
+    
 
     private void Awake()
     {
